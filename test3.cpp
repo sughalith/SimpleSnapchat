@@ -6,6 +6,11 @@
 #include <cmath>
 #include <vector>
 #include <iostream>
+//#include <SDL2/SDL_mixer.h>
+
+//#define MUS_PATH "epic.ogg"
+
+//Mix_Music *music = NULL;
 
 using namespace cv;
 using namespace std;
@@ -37,8 +42,6 @@ void drawCircle(unsigned int R, int Ox, int Oy, SDL_Surface* surface, Uint32 RGB
 void drawPixel(int x, int y, SDL_Surface* surface, Uint32 RGBA);
 void initColor(SDL_Surface* surface, Uint32 RGBA);
 
-static const char *MY_COOL_MP3 = "cool_tunes.mp3";
-
 int main()
 {
 	
@@ -50,7 +53,7 @@ int main()
 	SDL_Renderer* gRender = NULL;
 	SDL_Event event;
 	SDL_Rect gThingsToDrawRange;
-	unsigned int brushSize = 10;
+	unsigned int brushSize = 4;
 	
 	vector<SDL_Rect> gFaceDrawingRangeList;
 	
@@ -77,7 +80,7 @@ int main()
     if(cap.read(inputFrame)) {
 		
 			gWindow = SDL_CreateWindow(
-						"Chujowy Snapchat",
+						"Simple Snapchat",
 						SDL_WINDOWPOS_UNDEFINED,
 						SDL_WINDOWPOS_UNDEFINED,
 						inputFrame.cols,
@@ -165,7 +168,21 @@ int main()
 			
 			if(spaceHit) {
 				
-					cout<<"drawing"<<endl;
+					/*cout<<"drawing"<<endl;
+					
+					if(SDL_Init(SDL_INIT_AUDIO) < 0)
+					return -1;
+					
+					if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2 , 4096 ) == -1)
+					return -1;
+					
+					music = Mix_LoadMUS(MUS_PATH);
+					if(music == NULL)
+					return -1;
+					
+					if(Mix_PlayMusic(music, -1) == -1)
+					return -1;
+					while (Mix_PlayingMusic() );*/
 					
 					Point p = findLargestFieldWithColor(orginalFrame, low, high);
 					
@@ -173,7 +190,7 @@ int main()
 							+ Point(
 								(closestFace.width - gThingsToDraw->w)/2,
 								(closestFace.height - gThingsToDraw->h)/2
-								) 
+								)
 						);
 					
 					if(p.x<0)
@@ -211,7 +228,8 @@ int main()
 							gThingsToDrawRange.h += p.y+brushSize - (gThingsToDrawRange.y+gThingsToDrawRange.h);
 							
 					}
-					
+					//Mix_FreeMusic(music);
+					//Mix_CloseAudio();
 					
 			}
 			
