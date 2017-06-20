@@ -109,7 +109,7 @@ int main()
 			
 			
 			gThingsToDrawRange = {inputFrame.cols/2,inputFrame.rows/2,0,0};
-			cout<<"init"<<endl;
+			//cout<<"init"<<endl;
 	}
 	
 	SDL_GetWindowSurface( gWindow );
@@ -126,6 +126,8 @@ int main()
     {
 		
 		if(cap.read(inputFrame)) {
+			
+			flip(inputFrame,inputFrame,1);
 			
 			++faceSearchCount;
 			++closestFaceRefreshCount;
@@ -164,7 +166,6 @@ int main()
 			//line(orginalFrame, closestFace.tl(), closestFace.tl()+Point(0,closestFace.height), Scalar(255,255,0), 2);
 			//line(orginalFrame, closestFace.tl()+Point(0,closestFace.height), closestFace.tl()+Point(closestFace.width,closestFace.height), Scalar(255,255,0), 2);
 			
-			flip(orginalFrame,orginalFrame,1);
 			gThingsToDisplay = orginalFrame.transformMatToSDLSurface();
 			
 			if(spaceHit) {
@@ -248,10 +249,10 @@ int main()
 					gFaceDrawingRangeList.push_back(gFaceDrawingRange);
 						
 						
-					cout<< gFaceDrawingRange.x <<endl;
+					/*cout<< gFaceDrawingRange.x <<endl;
 					cout<< gFaceDrawingRange.y <<endl;
 					cout<< gFaceDrawingRange.w <<endl;
-					cout<< gFaceDrawingRange.h <<endl;
+					cout<< gFaceDrawingRange.h <<endl;*/
 			}
 					
 			for(int i = 0; i<gFaceDrawingRangeList.size(); ++i)
