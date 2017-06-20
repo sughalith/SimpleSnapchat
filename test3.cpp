@@ -164,6 +164,7 @@ int main()
 			//line(orginalFrame, closestFace.tl(), closestFace.tl()+Point(0,closestFace.height), Scalar(255,255,0), 2);
 			//line(orginalFrame, closestFace.tl()+Point(0,closestFace.height), closestFace.tl()+Point(closestFace.width,closestFace.height), Scalar(255,255,0), 2);
 			
+			flip(orginalFrame,orginalFrame,1);
 			gThingsToDisplay = orginalFrame.transformMatToSDLSurface();
 			
 			if(spaceHit) {
